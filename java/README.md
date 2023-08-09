@@ -1,0 +1,3 @@
+- Comparable: É uma interface que deve ser implementada pela classe dos objetos que serão comparados. A classe deve conter o método compareTo, onde são definidas as regras de comparação entre os objetos. Essa interface é usada para definir a ordem natural dos objetos.
+
+- Comparator: É outra interface que pode ser implementada em uma classe externa ao objeto que será comparado, ou até mesmo na própria classe do objeto (caso seja necessário definir múltiplas formas de comparação). A classe que implementa o Comparator deve conter o método compare, onde são especificadas as regras de comparação entre os objetos. Isso permite que diferentes critérios de comparação sejam aplicados a um conjunto de objetos, sem modificar a implementação da classe principal.
