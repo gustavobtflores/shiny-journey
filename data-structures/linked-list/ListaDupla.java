@@ -1,24 +1,24 @@
 public class ListaDupla {
 	private No ref;
-	
+
 	public ListaDupla() {
 		this.ref = null;
 	}
-	
+
 	public void imprime() {
 		if(this.ref == null) {
 			System.out.println("Lista vazia");
 			return;
 		}
-		
+
 		No aux = ref;
-		
+
 		//Lista do início ao fim
 		while(aux.getProx() != null) {
 			System.out.print(aux.getInfo() + " ");
 			aux = aux.getProx();
 		}
-		
+
 		System.out.println(aux.getInfo());
 
 		//Lista do fim ao início
@@ -26,72 +26,84 @@ public class ListaDupla {
 			System.out.print(aux.getInfo() + " ");
 			aux = aux.getAnter();
 		}
-		
+
 		System.out.println(aux.getInfo());
 	}
-	
+
 	public void insere(int info) {
-		if(ref != null) {
-			for(No aux = this.ref; aux != null; aux = aux.getProx()) {
-				if(aux.getInfo() >= info) {
+		if (!listaVazia()) {
+			for (No aux = this.ref; aux != null; aux = aux.getProx()) {
+				No proximo = aux.getProx();
+
+				// Verifica se o valor do elemento atual é maior ou igual ao valor a ser inserido
+				if (aux.getInfo() >= info) {
 					No novo = new No(info, ref);
 					aux.setAnter(novo);
 					ref = novo;
 					break;
-				}
-				
-				if(aux.getInfo() <= info) {
-					if(aux.getProx() == null) {
+				} else {
+					// Verifica se existe um próximo elemento, senão adiciona o argumento passado ao final da lista
+					if (proximo == null) {
 						No novo = new No(info, null, aux);
 						aux.setProx(novo);
 						break;
 					}
-					
-					if(aux.getProx().getInfo() >= info) {
+
+					// Verifica se o próximo elemento tem valor maior ou igual ao valor a ser inserido
+					if (proximo.getInfo() >= info) {
 						No novo = new No(info, aux.getProx(), aux);
-						aux.getProx().setAnter(novo);
+						proximo.setAnter(novo);
 						aux.setProx(novo);
 						break;
 					}
 				}
 			}
-			
+
 			return;
 		}
-		
-		No novo = new No(info);
-		ref = novo;
+
+		// Se a lista estiver vazia, cria um novo nó com o valor a ser inserido e define como referência
+		ref = new No(info);
 	}
-	
+
+
 	public void remove(int info) {
-		if(ref == null) {
+		if (listaVazia()) {
 			System.out.println("Não é possível remover de uma lista vazia");
 			return;
 		}
-		
-		if(ref.getInfo() == info && ref.getProx() == null) {
-			ref = null;
+
+		// Verifica se o elemento a ser removido é o único da lista
+		if (ref.getInfo() == info && ref.getProx() == null) {
+			ref = null; // Remove o único elemento da lista
+			return;
 		}
-		
-		for(No aux = this.ref; aux != null; aux = aux.getProx()) {
-			if(aux.getInfo() == info) {
-				if(aux.getAnter() != null) {
-					aux.getAnter().setProx(aux.getProx());
+
+		// Percorre a lista para encontrar o elemento a ser removido
+		for (No atual = ref; atual != null; atual = atual.getProx()) {
+			No anterior = atual.getAnter();
+			No proximo = atual.getProx();
+
+			// Verifica se o elemento atual é o que deve ser removido
+			if (atual.getInfo() == info) {
+				if (anterior != null) {
+					anterior.setProx(proximo);
 				} else {
-					ref = aux.getProx();
+					ref = proximo;
 				}
-				
-				if(aux.getProx() != null) {
-					aux.getProx().setAnter(aux.getAnter());
+
+				if (proximo != null) {
+					proximo.setAnter(anterior);
 				}
 			}
-			
-			if(aux.getProx() != null && aux.getProx().getInfo() > info) {
+
+			// Se o próximo elemento tem valor maior que o argumento passado, interrompe o loop
+			if (proximo != null && proximo.getInfo() > info) {
 				break;
 			}
 		}
 	}
-	
+
 	public boolean listaVazia() {
 		return ref == null;
 	}
