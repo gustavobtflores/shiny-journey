@@ -1,6 +1,36 @@
-package BasicOperations;
+package list.BasicOperations;
 
-public class Main {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoList {
+    private final List<Todo> todoList;
+
+    public TodoList() {
+        todoList = new ArrayList<>();
+    }
+
+
+    public void addTodo(String title, String description){
+        Todo newTodo = new Todo(title, description);
+        todoList.add(newTodo);
+        System.out.println("Task " + title + " added!");
+    }
+
+    public int getTotalTodoAmount(){
+        return this.todoList.size();
+    }
+
+    public ArrayList<String> getTodosDescriptions(){
+        ArrayList<String> descriptions = new ArrayList<>();
+
+        for(Todo todo : todoList){
+            descriptions.add(todo.getDescription());
+        }
+
+        return descriptions;
+    }
+
     public static void main(String[] args) {
         //Lista de tarefas
         TodoList list = new TodoList();

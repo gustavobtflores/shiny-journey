@@ -1,19 +1,11 @@
-package BasicOperations;
+package list.BasicOperations;
 
 public class Todo {
     String title;
-    String description = "";
-
-    public String getTitle() {
-        return title;
-    }
+    String description;
 
     public String getDescription() {
         return description;
-    }
-
-    public Todo(String title){
-        this.title = title;
     }
 
     public Todo(String title, String description){
