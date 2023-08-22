@@ -1,0 +1,3 @@
+[submodule "web-development/css/profile-card"]
+	path = web-development/css/profile-card
+	url = https://github.com/gustavobtflores/profile-card
